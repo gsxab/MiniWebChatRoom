@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="css/chatroom-black.css"></link>
+<meta charset="UTF-8">
+<title>黑暗系聊天室</title>
+<script type="text/javascript">
+function judgelight(){
+	
+	var result = location.search.match(new RegExp("[\\?\\&]light=","i"));
+	if(result == null || result.length < 1){
+		document.getElementById('sendframe').src = "send.jsp";
+	} else {
+		document.getElementById('sendframe').src = "send.jsp?light=";	
+	}
+}
+</script>
+<frameset cols="25%,75%" class="frames">
+	<frame src="users.jsp"></frame>
+	<frameset rows="75%,25%" onload="judgelight()">
+		<frame src="msgs.jsp#end"></frame>
+		<frame id="sendframe" src="" scrolling="no"></frame>
+	</frameset>
+</frameset>
+</html>

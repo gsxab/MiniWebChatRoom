@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>黑暗系聊天室登录界面</title>
+
+<link rel="stylesheet" href="css/chatroom-black.css"></link>
+
+<script type="text/javascript">
+function check(){
+	re = /^[\w\u4e00-\u9fa5]{4,20}$/;
+	pass = true;
+	value = document.getElementById('username').value;
+	if(!re.exec(value)){
+		document.getElementById('prompt').innerHTML='用户名格式不正确';
+		pass = false;
+	} else {
+		document.getElementById('prompt').innerHTML='';
+	}
+	if(!re.exec(document.getElementById('password').value)){
+		document.getElementById('pswdprompt').innerHTML='密码的格式不正确';
+		pass = false;
+	} else {
+		document.getElementById('pswdprompt').innerHTML='';
+	}
+	return pass;
+}
+</script>
+
+</head>
+<body>
+
+<img alt="黑暗系聊天室logo" src="img/logo.png" class="logo" />
+<p id="title" class="strangewords">
+黑暗系聊天室欢迎你的归来，请输入您的用户名和密码</p>
+
+<div class="login">
+<form name="form1" action="loginaction.html" onsubmit="return check()" method="post">
+<table>
+	<tr><td><p class="prompt">用户名：</td><td><input type="text" name="username" id="username" class="input" onblur="check()" /></td><td><div id="prompt" class="warning"></div></td></tr>
+	<tr><td><p class="prompt">密&nbsp;&nbsp;码：</td><td><input type="password" name="password" id="password" class="input" onblur="check()" /></td><td><div id="pswdprompt" class="warning"></div></td></tr>
+	<tr><td/><td><input type="checkbox" name="light" value="1" /><a class="prompt" style="text-align:left">减少表情</a></td></tr>
+	<tr><td><input type="submit" value="登录" /></td><td><input type="reset" value="清空" /></td></tr>
+</table>
+</form>
+</div>
+<br/>
+<div >
+<a href="register.html">&gt;&gt;新用户点击这里注册领取新手礼包&lt;&lt;</a>
+</div>
+
+</body>
+</html>

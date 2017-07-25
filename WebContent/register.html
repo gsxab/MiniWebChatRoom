@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>黑暗系聊天室注册界面</title>
+
+<link rel="stylesheet" href="css/chatroom-black.css"></link>
+
+<script type="text/javascript">
+function check(){
+	re = /^[\w\u4e00-\u9fa5]+$/;
+	pass = true;
+	value = document.getElementById('username').value;
+	if(!re.exec(value)){
+		document.getElementById('nameprompt').innerHTML='用户名只允许字母数字且非空';
+		pass = false;
+	} else if(value.length >= 20) {
+		document.getElementById('nameprompt').innerHTML='用户名过长';
+		pass = false;
+	} else if(value.length <= 4) {
+		document.getElementById('nameprompt').innerHTML='用户名过短';
+		pass = false;
+	} else {
+		document.getElementById('nameprompt').innerHTML='';
+	}
+	value = document.getElementById('password').value;
+	if(!re.exec(value)){
+		document.getElementById('pswdprompt').innerHTML='密码只允许字母数字且非空';
+		pass = false;
+	} else if(value.length >= 20) {
+		document.getElementById('pswdprompt').innerHTML='密码过长';
+	} else if(value.length <= 4) {
+		document.getElementById('pswdprompt').innerHTML='密码过短';
+	} else {
+		document.getElementById('pswdprompt').innerHTML='';
+	}
+	if(document.getElementById('password').value != document.getElementById('password2').value){
+		document.getElementById('pswd2prompt').innerHTML='确认密码与密码不一致';
+		pass = false;
+	} else {
+		document.getElementById('pswd2prompt').innerHTML='';
+	}
+	return pass;
+}
+function ajaxInit() {
+	var xmlHttp;
+	try
+		{
+		// Firefox, Opera 8.0+, Safari
+		xmlHttp=new XMLHttpRequest();
+	}
+	catch (e)
+	{
+	// Internet Explorer
+		try
+		{
+			xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("您的浏览器不支持AJAX！");
+				return false;
+			}
+		}
+	}
+	return xmlHttp;
+}
+function check_username(){
+	var hr = ajaxInit();
+	hr.open("get", "loginaction.html?check=" + document.getElementById('username').value, true)
+	hr.onreadystatechange = function(){
+		if(hr.readyState == 4 && hr.status == 200){
+			var i = hr.responseText;
+			if(i == 0){
+				document.getElementById('nameprompt').innerText = '';
+			} else if(i == 1){
+				document.getElementById('nameprompt').innerText = '用户名已注册';
+			} else if(i == 2){
+				document.getElementById('nameprompt').innerText = '用户名不合法';
+			} else if(i == 3){
+				document.getElementById('nameprompt').innerText = '内部数据库错误查询失败';
+			}
+		}
+	};
+	hr.send(null);
+}
+</script>
+
+</head>
+<body>
+
+<img alt="黑暗系聊天室logo" src="img/logo.png" class="logo" />
+
+<div class="login">
+<form name="form1" action="registeraction.html" onsubmit="if(check()){return check_username();}else return false;" method="post">
+<table>
+	<tr><td><p class="prompt">用&nbsp;户&nbsp;名：</td><td><input type="text" name="username" id="username" class="input"  onblur="if(check())check_username();" /></td><td><div id="nameprompt" class="warning"></div></td></tr>
+	<tr><td><p class="prompt">密&nbsp;&nbsp;&nbsp;&nbsp;码：</td><td><input type="password" name="password" id="password" class="input" onblur="if(check())check_username();" /></td><td><div id="pswdprompt" class="warning"></div></td></tr>
+	<tr><td><p class="prompt">确认密码：</td><td><input type="password" name="password2" id="password2" class="input" onblur="if(check())check_username();" /></td><td><div id="pswd2prompt" class="warning"></div></td></tr>
+	<tr><td/><td><input type="checkbox" name="light" value="1" /><a class="prompt" style="text-align:left">登录后减少表情</a></td></tr>
+	<tr><td><input type="submit" value="注册并登录" /></td><td><input type="reset" value="清空" /></td></tr>
+</table>
+</form>
+</div>
+<br/>
+<div >
+<a href="login.html">&gt;&gt;已经成为用户点击这里选择进行登录&lt;&lt;</a>
+</div>
+
+</body>
+</html>
