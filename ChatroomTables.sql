@@ -1,5 +1,6 @@
 use chatroom;
 
+drop table if exists cr_avatars;
 drop table if exists cr_msgs;
 drop table if exists cr_users;
 create table cr_users(
@@ -18,9 +19,14 @@ create table cr_msgs(
 	mhasprev tinyint(1) not null default 0, -- message has prev
 	foreign key (uid) references cr_users(uid)
 );
+create table cr_avatars (
+	uid char(36) primary key references cr_users(uid),
+	uavatar blob,
+);
 
 grant select, insert on chatroom.cr_users to 'webuser'@'%';
 grant select, insert on chatroom.cr_msgs to 'webuser'@'%';
+grant select, insert, delete on chatroom.cr_avatars to 'webuser'@'%';
 
 delimiter $$
 

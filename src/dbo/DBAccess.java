@@ -1,5 +1,6 @@
 package dbo;
 
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.sql.*;
 import java.util.LinkedList;
@@ -91,6 +92,7 @@ public class DBAccess {
 						sta2.setString(1, user.getUserId());
 						sta2.setString(2, user.getUsername());
 						sta2.setString(3, user.getPassword());
+						user.setUserpriv(UserInfo.Privilege.NORMAL);
 					
 						rslt = sta2.executeUpdate();
 					} finally {
@@ -264,5 +266,50 @@ public class DBAccess {
 		return false;
 	}
 	
+	public boolean setAvatar(UserInfo user, InputStream inputstream) throws SQLException {
+		PreparedStatement sta1 = null;
+		try {
+			sta1 = conn.prepareStatement("delete from cr_avatars where uid = ?");
+			sta1.setString(1, user.getUserId());
+			sta1.executeUpdate();
+		} finally {
+			if(sta1 != null)sta1.close();
+		}
+		
+		PreparedStatement sta = null;
+		try {
+			sta = conn.prepareStatement("insert into cr_avatars(uid, uavatar) values(?, ?) ");
+			sta.setString(1, user.getUserId());
+			sta.setBlob(2, inputstream);
+			return sta.executeUpdate()>0;
+		} catch(SQLException e) {
+			Log.getInstance().logError("当更新头像时发生SQL异常，用户" + user).logErrorOnException(e);
+			return false;
+		} finally {
+			if(sta != null)sta.close();
+			conn.close();
+		}
+	}
 	
+	public byte[] getAvatar(String userId) throws SQLException {
+		PreparedStatement sta = null;
+		ResultSet rs = null;
+		try {
+			sta = conn.prepareStatement("select uavatar from cr_avatars where uid=? ");
+			sta.setString(1, userId);
+			rs = sta.executeQuery();
+			if(rs.next()) {
+				return rs.getBytes(1);
+			}
+			//Log.getInstance().logWarning("未找到头像，用户id：" + userId);
+			return null;
+		} catch(SQLException e) {
+			Log.getInstance().logError("当获取头像时发生SQL异常，用户id：" + userId).logErrorOnException(e);
+			return null;
+		} finally {
+			if(sta != null)sta.close();
+			if(rs != null)rs.close();
+			conn.close();
+		}
+	}
 }

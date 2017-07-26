@@ -34,8 +34,7 @@
 		if(users == null)
 			throw new NullPointerException();
 	} catch(Exception e) {
-		Log.getInstance().logWarning("用户" + login.getUser().getUserId() + " " + login.getUser().getUsername() + "查询消息数据时异常");
-		Log.getInstance().logWarning(e.getMessage());
+		Log.getInstance().logError("查询用户时异常" + login.getUser().toString()).logErrorOnException(e);
 %>
 		<div class="warning">查询用户数据时发生异常！</div>
 <%
@@ -45,8 +44,8 @@
 
 <div class="userlist">
 <img src="img/logo.png" class="smalllogo" />
+<div class="myuserdispmini"><%= login.getUser().getUsername() %><a href="avatar.html" target="_blank"><img class="myuseravatar" src="avatar?uid=<%= login.getUser().getUserId() %>" title="点击更换头像" /></a></div>
 <div class="userlistheader">用户列表：</div>
-<div class="myuserdispmini"><%= login.getUser().getUsername() %></div>
 <% 
 	Integer usercount = (Integer)application.getAttribute("usersonlinecount");
 	if(usercount != null){
@@ -58,11 +57,11 @@
 	for(UserInfo user : (Iterable<UserInfo>)application.getAttribute("usersonline")){
 		if(user.getUserpriv() == UserInfo.Privilege.NORMAL){
 %>
-			<div class="userdispmini"><%= user.getUsername() %></div>
+			<div class="userdispmini"><%= user.getUsername() %><img class="avatar" src="avatar?uid=<%= user.getUserId() %>" /></div>
 <%
 		} else {
 %>
-			<div class="userdispminipriv"><%= user.getUsername() %></div>
+			<div class="userdispminipriv"><%= user.getUsername() %><img class="avatar" src="avatar?uid=<%= user.getUserId() %>" /></div>
 <%
 		}
 	}
@@ -73,11 +72,11 @@
 		if(!user.getUserId().equals(login.getUser().getUserId())){
 			if(user.getUserpriv() == UserInfo.Privilege.NORMAL){
 %>
-				<div class="userdispmini"><%= user.getUsername() %></div>
+				<div class="userdispmini"><%= user.getUsername() %><img class="avatar" src="avatar?uid=<%= user.getUserId() %>" /></div>
 <%
 			} else {
 %>
-				<div class="userdispminipriv"><%= user.getUsername() %></div>
+				<div class="userdispminipriv"><%= user.getUsername() %><img class="avatar" src="avatar?uid=<%= user.getUserId() %>" /></div>
 <%
 			}
 		}

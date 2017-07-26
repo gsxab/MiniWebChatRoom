@@ -173,3 +173,14 @@ body {
 	font-weight : 600px;
 	opacity : 1;
 }
+
+.avatar {
+	width : auto;
+	height : 30px;
+	float : right;
+	margin : auto;
+}
+.myuseravatar {
+	width : 100%;
+	height : auto;
+}

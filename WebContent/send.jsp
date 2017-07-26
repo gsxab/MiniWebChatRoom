@@ -20,15 +20,22 @@ function check(){
 	}
 	return true;
 }
-/*
+function ctrlenter(event){
+	if(event.keyCode==13 && event.ctrlKey){
+		if(check())
+			document.sendmsg.submit();
+		else 
+			return false;
+	}
+}
 function logoutfunc(){
-	var date=new Date(); 
+/*	var date=new Date(); 
 	date.setTime(date.getTime()-100); 
 	document.cookie="loginid=; expires="+date.toGMTString(); 
 	document.cookie="loginname=; expires="+date.toGMTString(); 
 	document.cookie="loginadmin=; expires="+date.toGMTString();
-	top.location.href="index.html";
-}*/
+	top.location.href="index.html"; */
+}
 </script>
 
 </head>
@@ -46,14 +53,14 @@ function logoutfunc(){
 
 <form name="sendmsg" onsubmit="return check()" action="sendaction.html" method="post">
 <div class="sendarea">
-<textarea class="send" name="msgcontent" id="msgcontent" rows="5" ></textarea>
+<textarea class="send" name="msgcontent" id="msgcontent" rows="5" onkeyup="return ctrlenter(event);"></textarea>
 <div id="memelist" style="text-align:left;overflow-y:auto;display:none" ></div>
 <div class="send_foot">
 	<input type="button" class="meme_sel" onclick="togglememes()" />
 	<center><table><tr>
 		<td><input type="submit" value="发送" /></td>
 		<td><input type="reset" value="清空" /></td>
-		<td><input type="button" value="注销" id="logout" onclick="top.location.href='LogoutAction.html'" /></td>
+		<td><input type="button" value="注销" id="logout" onclick="logoutfunc()" /></td>
 <%
 	if(login.getUser().getUserpriv() == UserInfo.Privilege.ADMIN){
 %>

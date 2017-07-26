@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>黑暗系聊天室头像更改界面</title>
+<link rel="stylesheet" href="css/chatroom-black.css"></link>
 </head>
 <body>
 
 <form name="form1" action="avataraction" onsubmit="" method="post" enctype="multipart/form-data">
+<div>当前头像：</div>
+<img alt="当前头像" src="avatar" />
+<hr>
 <input type="file" name="avatar" accept=".jpg,.png,.jpeg" />
 <input type="submit" value="上传" />
 </form>

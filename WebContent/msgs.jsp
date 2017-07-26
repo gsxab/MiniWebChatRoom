@@ -62,14 +62,14 @@
 	for(MessageInfo msg : msgs){
 %>
 		<a name="#<%= msg.getId() %>"></a>
-<%
+<% 
 		if(msg.getUserInfo().getUserId().equals(login.getUser().getUserId())){
 %>
-			<div class="mymessagedisp"><%= msg.toString() %></div>
+			<div class="mymessagedisp"><img class="avatar" src="avatar?uid=<%= msg.getUserInfo().getUserId() %>" /><%= msg.toString() %></div>
 <%
 		} else {
 %>
-			<div class="messagedisp"><%= msg.toString() %></div>
+			<div class="messagedisp"><img class="avatar" src="avatar?uid=<%= msg.getUserInfo().getUserId() %>" /><%= msg.toString() %></div>
 <% 
 		}
 	}
