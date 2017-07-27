@@ -38,10 +38,15 @@ public class LoginAction extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String str = request.getParameter("check");
 		if(str == null) {
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("text/html;charset=utf-8;pageencoding=utf-8");
-			response.getWriter().append("请输入正确内容登录！");
-			response.addHeader("refresh", "2;url=index.html");
+			str = request.getParameter("logout");
+			if(str == null) {
+				response.setCharacterEncoding("UTF-8");
+				response.setContentType("text/html;charset=utf-8;pageencoding=utf-8");
+				response.getWriter().append("请输入正确内容登录！");
+				response.addHeader("refresh", "2;url=index.html");
+			} else {
+				request.getSession().invalidate();
+			}
 		} else {
 			try{
 				DBAccess da = new DBAccess();

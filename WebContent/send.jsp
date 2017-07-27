@@ -7,7 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <title>发送页面</title>
 
 <link rel="stylesheet" href="css/chatroom-black.css"></link>
@@ -28,6 +28,35 @@ function ctrlenter(event){
 			return false;
 	}
 }
+function ajaxInit() {
+	var xmlHttp;
+	try
+		{
+		// Firefox, Opera 8.0+, Safari
+		xmlHttp=new XMLHttpRequest();
+	}
+	catch (e)
+	{
+	// Internet Explorer
+		try
+		{
+			xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("您的浏览器不支持AJAX！");
+				return false;
+			}
+		}
+	}
+	return xmlHttp;
+}
 function logoutfunc(){
 /*	var date=new Date(); 
 	date.setTime(date.getTime()-100); 
@@ -35,6 +64,14 @@ function logoutfunc(){
 	document.cookie="loginname=; expires="+date.toGMTString(); 
 	document.cookie="loginadmin=; expires="+date.toGMTString();
 	top.location.href="index.html"; */
+	var hr = ajaxInit();
+	hr.open("get", "loginaction.html?logout=", true);
+	hr.onreadystatechange = function(){ 
+		if(hr.readyState == 4 && hr.status == 200){
+			top.location.href = "index.html";
+		}
+	}
+	hr.send(null);
 }
 </script>
 
