@@ -13,7 +13,7 @@ create table cr_users(
 create table cr_msgs(
 	mid int primary key auto_increment,
 	uid char(36) not null, -- user infomation
-	mtime timestamp not null default current_timestamp,
+	mtime timestamp(3) not null default current_timestamp,
 	mcontent varchar(100) not null,
 	locked tinyint(1) not null default 0,
 	mhasprev tinyint(1) not null default 0, -- message has prev

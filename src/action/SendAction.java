@@ -53,6 +53,7 @@ public class SendAction extends HttpServlet {
 		
 		if(login == null) {
 			response.sendRedirect("send.jsp");
+			return;
 		}
 		
 		Date time = new Date();

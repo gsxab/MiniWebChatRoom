@@ -84,6 +84,8 @@ public class LoginCount implements HttpSessionListener, HttpSessionAttributeList
 	public void attributeAdded(HttpSessionBindingEvent arg0) {
 		// TODO Auto-generated method stub
 		HttpSession session = arg0.getSession();
+		if(!arg0.getName().equals("logininfo"))return;
+		
 		LoginCheck login = (LoginCheck) session.getAttribute("logininfo");
 
 		ServletContext application = session.getServletContext();

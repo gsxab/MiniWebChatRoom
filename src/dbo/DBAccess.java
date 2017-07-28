@@ -135,7 +135,7 @@ public class DBAccess {
 		ResultSet rs = null;
 		try{
 			sta = conn.createStatement();
-			rs = sta.executeQuery("select uid, uname, upriv from cr_users limit 100");
+			rs = sta.executeQuery("select uid, uname, upriv from cr_users limit 10");
 		
 			if(rs != null) {
 				while(rs.next()) {
@@ -163,24 +163,57 @@ public class DBAccess {
 		try {
 			sta = conn.createStatement();
 			rs = sta.executeQuery("select mid, uid, mtime, mcontent, uname, upriv, mhasprev from cr_msgs left outer join cr_users using(uid) order by mid desc limit 100");
-			if(rs != null) {
-				while(rs.next()) {
-					MessageInfo msg = new MessageInfo();
-					msg.setId(rs.getInt("mid"));
-					msg.setMsgTime(rs.getTimestamp("mtime"));
-					String msgcontent = rs.getString("mcontent");
-					UserInfo msguser = new UserInfo();
-					msguser.setUsername(rs.getString("uname"));
-					msguser.setUserId(rs.getString("uid"));
-					msguser.setUserpriv(UserInfo.Privilege.valueOf(rs.getInt("upriv")));
-					msg.setUserInfo(msguser);
-					while(rs.getBoolean("mhasprev")) {
-						rs.next();
-						msgcontent = rs.getString("mcontent") + msgcontent;
-					}
-					msg.setMsgContent(msgcontent);
-					msgs.addFirst(msg);
+			while(rs.next()) {
+				MessageInfo msg = new MessageInfo();
+				msg.setId(rs.getInt("mid"));
+				msg.setMsgTime(rs.getTimestamp("mtime"));
+				String msgcontent = rs.getString("mcontent");
+				UserInfo msguser = new UserInfo();
+				msguser.setUsername(rs.getString("uname"));
+				msguser.setUserId(rs.getString("uid"));
+				msguser.setUserpriv(UserInfo.Privilege.valueOf(rs.getInt("upriv")));
+				msg.setUserInfo(msguser);
+				while(rs.getBoolean("mhasprev")) {
+					rs.next();
+					msgcontent = rs.getString("mcontent") + msgcontent;
 				}
+				msg.setMsgContent(msgcontent);
+				msgs.addFirst(msg);
+			}
+		} finally {
+			if(sta != null)sta.close();
+			if(rs != null)rs.close();
+			conn.close();
+		}
+		return msgs.toArray(new MessageInfo[0]);
+	}
+
+	public MessageInfo[] getMessageListSince(java.util.Date specifiedtime) throws SQLException {
+		PreparedStatement sta = null;
+		LinkedList<MessageInfo> msgs = new LinkedList<MessageInfo>();
+		
+		ResultSet rs = null;
+		
+		try {
+			sta = conn.prepareStatement("select mid, uid, mtime, mcontent, uname, upriv, mhasprev from cr_msgs left outer join cr_users using(uid) where mtime > ? order by mid desc");
+			sta.setTimestamp(1, new Timestamp(specifiedtime.getTime()));
+			rs = sta.executeQuery();
+			while(rs.next()) {
+				MessageInfo msg = new MessageInfo();
+				msg.setId(rs.getInt("mid"));
+				msg.setMsgTime(rs.getTimestamp("mtime"));
+				String msgcontent = rs.getString("mcontent");
+				UserInfo msguser = new UserInfo();
+				msguser.setUsername(rs.getString("uname"));
+				msguser.setUserId(rs.getString("uid"));
+				msguser.setUserpriv(UserInfo.Privilege.valueOf(rs.getInt("upriv")));
+				msg.setUserInfo(msguser);
+				while(rs.getBoolean("mhasprev")) {
+					rs.next();
+					msgcontent = rs.getString("mcontent") + msgcontent;
+				}
+				msg.setMsgContent(msgcontent);
+				msgs.addFirst(msg);
 			}
 		} finally {
 			if(sta != null)sta.close();

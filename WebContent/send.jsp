@@ -12,6 +12,7 @@
 
 <link rel="stylesheet" href="css/chatroom-black.css"></link>
 
+<script type="text/javascript" src="js/ajaxInit.js"></script>
 <script type="text/javascript">
 function check(){
 	msg = document.getElementById('msgcontent').value;
@@ -27,35 +28,6 @@ function ctrlenter(event){
 		else 
 			return false;
 	}
-}
-function ajaxInit() {
-	var xmlHttp;
-	try
-		{
-		// Firefox, Opera 8.0+, Safari
-		xmlHttp=new XMLHttpRequest();
-	}
-	catch (e)
-	{
-	// Internet Explorer
-		try
-		{
-			xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
-		}
-		catch (e)
-		{
-			try
-			{
-				xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			catch (e)
-			{
-				alert("您的浏览器不支持AJAX！");
-				return false;
-			}
-		}
-	}
-	return xmlHttp;
 }
 function logoutfunc(){
 /*	var date=new Date(); 

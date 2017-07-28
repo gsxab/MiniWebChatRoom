@@ -50,7 +50,8 @@ public class LoginFilter implements Filter {
 				&& !uri.endsWith("/loginaction.html")
 				&& !uri.endsWith("/registeraction.html")
 				&& !uri.endsWith("/css/chatroom-black.css")
-				&& !uri.endsWith("/msgs.jsp")){
+				&& !uri.endsWith("/msgs.jsp")
+				&& !uri.endsWith("/newmsgs.jsp")){
 			if(LoginCheck.check(request1.getSession()) == null) {
 				response1.sendRedirect("login.html");
 				return;
