@@ -4,6 +4,49 @@
 <%@ page import="model.MessageInfo" %>
 <%@ page import="model.UserInfo" %>
 <%@ page import="logincheck.LoginCheck" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="log.Log" %>
+<% 
+	request.setCharacterEncoding("UTF-8");
+	response.setCharacterEncoding("UTF-8");
+	response.setContentType("text/html;charset=utf-8;pageencoding=utf-8");
+	
+	LoginCheck login = LoginCheck.check(request.getSession());
+	
+	if(login != null) {
+		Date time = new Date();
+		String msgcontent = request.getParameter("msgcontent");
+		//msgcontent = new String(msgcontent.getBytes("ISO-8859-1"), "UTF-8");
+		
+		if(msgcontent != null) {
+			msgcontent = msgcontent.replace("&", "&amp;");
+			msgcontent = msgcontent.replace("<", "&lt;").replace(">", "&gt;").replace(" ", "&nbsp;");
+			msgcontent = msgcontent.replace("\r\n", "<br/>").replace("\n", "<br/>").replace("\r", "<br/>");
+			msgcontent = msgcontent.replaceAll("#\\[([gsb])\\]\\((1?\\d)\\)", "<img src='img/em/$1/$2.gif' alt='表情' class='meme'/>");
+			
+			MessageInfo msg = new MessageInfo();
+			msg.setMsgContent(msgcontent);
+			msg.setMsgTime(time);
+			UserInfo user = login.getUser();
+			boolean locked = (request.getParameter("locked") != null);
+			msg.setUserInfo(user);
+			
+			//String redirectTarget = (login.getLight() ? "send.jsp?light=" : "send.jsp");
+			
+			try {
+				DBAccess da = new DBAccess();
+				da.sendNewMessage(msg, locked);
+				Log.getInstance().log(msg.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+				Log.getInstance().logError("发送消息时SQL错误或编码错误：用户" + user.getUserId() + "，消息：" + msg.toString());
+				//response.getWriter().print("未知错误无法发送消息，可能是无法编码。");
+				//response.addHeader("refresh", "3;url=" + redirectTarget);
+				//return;
+			}
+		}
+	}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,7 +94,6 @@ function logoutfunc(){
 <body>
 
 <%
-	LoginCheck login = LoginCheck.check(session);
 	if(login == null){
 %>
 		<div class="warning">用户未登录！</div>
@@ -60,7 +102,7 @@ function logoutfunc(){
 	}
 %>
 
-<form name="sendmsg" onsubmit="return check()" action="sendaction.html" method="post">
+<form name="sendmsg" onsubmit="return check()" action="send.jsp" method="post">
 <div class="sendarea">
 <textarea class="send" name="msgcontent" id="msgcontent" rows="5" onkeyup="return ctrlenter(event);"></textarea>
 <div id="memelist" style="text-align:left;overflow-y:auto;display:none" ></div>

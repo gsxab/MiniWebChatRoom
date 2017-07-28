@@ -230,7 +230,7 @@ public class DBAccess {
 	 * @throws UnsupportedEncodingException 无法转换为UTF-8编码
 	 */
 	static final int msg_length = 90;
-	public boolean sendNewMessage(MessageInfo msg) throws SQLException, UnsupportedEncodingException {
+	public boolean sendNewMessage(MessageInfo msg, boolean locked) throws SQLException, UnsupportedEncodingException {
 		PreparedStatement sta = null;
 		int rslt = 0;
 		try{
@@ -240,7 +240,7 @@ public class DBAccess {
 				sta.setString(1, msg.getUserInfo().getUserId());
 				sta.setTimestamp(2, new Timestamp(msg.getMsgTime().getTime()));
 				sta.setString(3, msgcontent);
-				sta.setInt(4, (msg.getUserInfo().getUserpriv() == null ? 0: 1));
+				sta.setBoolean(4, locked);
 				rslt = sta.executeUpdate();
 			} else {
 				// TODO 过长的内容
