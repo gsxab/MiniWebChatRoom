@@ -6,4 +6,4 @@ function selectcss(color){
 		//location.reload();
 	}
 }
-selectcss('white');
+selectcss('blue');
