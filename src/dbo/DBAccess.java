@@ -135,7 +135,7 @@ public class DBAccess {
 		ResultSet rs = null;
 		try{
 			sta = conn.createStatement();
-			rs = sta.executeQuery("select uid, uname, upriv from cr_users limit 10");
+			rs = sta.executeQuery("select uid, uname, upriv from cr_users l");
 		
 			if(rs != null) {
 				while(rs.next()) {

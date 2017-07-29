@@ -53,7 +53,8 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <title>发送页面</title>
 
-<link rel="stylesheet" href="css/chatroom-black.css"></link>
+<link id="theme" type="text/css" rel="stylesheet" href="css/chatroom-black.css"></link>
+<script type="text/javascript" src="js/selectcss.js"></script>
 
 <script type="text/javascript" src="js/ajaxInit.js"></script>
 <script type="text/javascript">

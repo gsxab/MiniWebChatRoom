@@ -11,7 +11,8 @@
 <meta http-equiv="refresh" content="60" />
 <title>用户列表页</title>
 
-<link rel="stylesheet" href="css/chatroom-black.css"></link>
+<link id="theme" type="text/css" rel="stylesheet" href="css/chatroom-black.css"></link>
+<script type="text/javascript" src="js/selectcss.js"></script>
 
 </head>
 <body>
