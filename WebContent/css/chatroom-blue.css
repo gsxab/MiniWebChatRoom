@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
 body {
-	background-color : #9ff;
+	background-color : #09f;
 	text-align : center;
 }
 .frames{
-	background-color : #9ff;
+	background-color : #09f;
 }
 .login {
 	margin : 0 auto;
@@ -41,15 +41,15 @@ body {
 	border-radius : 5px 5px 0 0;
 	width : 100%;
 	resize : none;
-	background-color : #9ff;
+	background-color : #0cf;
 	color : black;
 	line-height : 20px;
 }
 .send_foot { 
 	width: 99%; 
 	height: auto; 
-	border-top: 1px solid #6cc; 
-	background-color: #6cc;
+	border-top: 1px solid #06c; 
+	background-color: #06c;
 	border-radius: 0 0 5px 5px; 
 	position: absolute; 
 } 
