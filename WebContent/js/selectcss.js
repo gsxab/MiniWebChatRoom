@@ -6,4 +6,5 @@ function selectcss(color){
 		//location.reload();
 	}
 }
-selectcss('blue');
+var themecolor = 'black'; // 'black', 'white', 'blue'
+selectcss(themecolor);
