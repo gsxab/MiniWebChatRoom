@@ -84,5 +84,6 @@ public class AvatarAction extends HttpServlet {
 			e.printStackTrace();
 			response.getWriter().println("更换头像失败");
 		}
+		response.sendRedirect("avatar.html");
 	}
 }

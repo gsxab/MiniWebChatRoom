@@ -68,24 +68,28 @@ function check_username(){
 </script>
 
 </head>
-<body>
-
+<body class="noscroll">
+<div class="container">
 <img alt="黑暗系聊天室logo" src="img/logo.png" class="logo" />
 
 <div class="login">
+<div class="clearfix">
 <form name="form1" action="registeraction.html" onsubmit="if(check()){return check_username();}else return false;" method="post">
 <table>
 	<tr><td><p class="prompt">用&nbsp;户&nbsp;名：</td><td><input type="text" name="username" id="username" class="input"  onblur="if(check())check_username();" /></td><td><div id="nameprompt" class="warning"></div></td></tr>
 	<tr><td><p class="prompt">密&nbsp;&nbsp;&nbsp;&nbsp;码：</td><td><input type="password" name="password" id="password" class="input" onblur="if(check())check_username();" /></td><td><div id="pswdprompt" class="warning"></div></td></tr>
 	<tr><td><p class="prompt">确认密码：</td><td><input type="password" name="password2" id="password2" class="input" onblur="if(check())check_username();" /></td><td><div id="pswd2prompt" class="warning"></div></td></tr>
-	<tr><td/><td><input type="checkbox" name="light" value="1" /><a class="prompt" style="text-align:left">登录后减少表情</a></td></tr>
-	<tr><td><input type="submit" value="注册并登录" /></td><td><input type="reset" value="清空" /></td></tr>
+	<tr><td/><td><input class="less_emot" type="checkbox" name="light" value="1" /><a class="prompt less_emot" style="text-align:left">登录后减少表情</a></td></tr>
+	<tr><td></td><td><input type="submit" value="注册并登录" /><input type="reset" value="清空" /></td></tr>
 </table>
 </form>
+</div>
 </div>
 <br/>
 <div >
 <a href="login.html">&gt;&gt;已经成为用户点击这里选择进行登录&lt;&lt;</a>
+</div>
+
 </div>
 
 </body>

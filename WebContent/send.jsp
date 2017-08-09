@@ -53,7 +53,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <title>发送页面</title>
 
-<link id="theme" type="text/css" rel="stylesheet" href="css/chatroom-black.css"></link>
+<link id="theme" type="text/css" rel="stylesheet" href=""></link>
 <script type="text/javascript" src="js/selectcss.js"></script>
 
 <script type="text/javascript" src="js/ajaxInit.js"></script>
@@ -115,8 +115,8 @@ function logoutfunc(){
 		<td><input type="button" class="cssselectorbtn" style="background-color:white" title="简朴白" onclick="setColorCookie('white')" /></td>
 		</tr>
 		<tr>
-		<td><input type="button" class="cssselectorbtn" style="background-color:#09f" title="天空蓝" onclick="setColorCookie('blue')" /></td>
-		<td><input type="button" class="cssselectorbtn" style="background-color:#09f" title="默认值" onclick="setColorCookie('')" /></td>
+		<td><input type="button" class="cssselectorbtn" style="background-color:#09f" title="湖水青" onclick="setColorCookie('blue')" /></td>
+		<td><input type="button" class="cssselectorbtn" style="background-color:#09f" title="掉线蓝" onclick="setColorCookie('lucky')" /></td>
 		</tr>
 	</table>
 	<center><table style="width:auto"><tr>
