@@ -172,3 +172,13 @@ body {
 	width : 100%;
 	height : auto;
 }
+
+.cssselector {
+	float : right;
+	margin : 0;
+}
+.cssselectorbtn {
+	border-style : none;
+	height : 15px;
+	width : 15px;
+}

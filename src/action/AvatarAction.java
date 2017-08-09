@@ -75,12 +75,14 @@ public class AvatarAction extends HttpServlet {
 				DBAccess da = new DBAccess();
 				if(da.setAvatar(login.getUser(), fi.getInputStream())) {
 					Log.getInstance().log("更换头像成功 " + login.getUser());
+					response.getWriter().println("更换头像成功");
 				}
 				break;
 			}
 		} catch (Exception e) {
 			Log.getInstance().logError("发送头像时异常" + login.getUser().toString()).logErrorOnException(e);
 			e.printStackTrace();
+			response.getWriter().println("更换头像失败");
 		}
 	}
 }

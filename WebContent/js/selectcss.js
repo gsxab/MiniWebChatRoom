@@ -6,5 +6,10 @@ function selectcss(color){
 		//location.reload();
 	}
 }
-var themecolor = 'black'; // 'black', 'white', 'blue'
+//'black', 'white', 'blue'
+var themecolor = 'blue';
+if(document.cookie.length > 0){
+	themecolormatch = document.cookie.match(/(^| )themecolor=([^;]+)(;|$)/);
+	if(themecolormatch != null)themecolor = unescape(themecolormatch[2])
+}
 selectcss(themecolor);

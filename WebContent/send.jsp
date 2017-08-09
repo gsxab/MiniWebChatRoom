@@ -109,7 +109,17 @@ function logoutfunc(){
 <div id="memelist" style="text-align:left;overflow-y:auto;display:none" ></div>
 <div class="send_foot">
 	<input type="button" class="meme_sel" onclick="togglememes()" />
-	<center><table><tr>
+	<table class="cssselector" >
+		<tr>
+		<td><input type="button" class="cssselectorbtn" style="background-color:black" title="经典黑" onclick="setColorCookie('black')" /></td>
+		<td><input type="button" class="cssselectorbtn" style="background-color:white" title="简朴白" onclick="setColorCookie('white')" /></td>
+		</tr>
+		<tr>
+		<td><input type="button" class="cssselectorbtn" style="background-color:#09f" title="天空蓝" onclick="setColorCookie('blue')" /></td>
+		<td><input type="button" class="cssselectorbtn" style="background-color:#09f" title="默认值" onclick="setColorCookie('')" /></td>
+		</tr>
+	</table>
+	<center><table style="width:auto"><tr>
 		<td><input type="submit" value="发送" /></td>
 		<td><input type="reset" value="清空" /></td>
 		<td><input type="button" value="注销" id="logout" onclick="logoutfunc()" /></td>
@@ -127,6 +137,14 @@ function logoutfunc(){
 </form>
 
 <script type="text/javascript">
+function setColorCookie(color) {
+	if(color.length == 0){
+		document.cookie = "themecolor=;expires=" + (new Date()).toGMTString();
+	} else {
+		document.cookie = "themecolor=" + color;
+	}
+	top.location.reload();
+}
 var isShowImg = false;
 var imglist = [ // 表情列表，在轻量模式下不显示后两系列
 	// 杀小兵系列
