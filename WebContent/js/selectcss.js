@@ -6,8 +6,8 @@ function selectcss(color){
 		//location.reload();
 	}
 }
-//'black', 'white', 'blue'
-var themecolor = 'blue';
+//'black', 'white', 'blue', 'lucky'
+var themecolor = 'lucky'; //default
 if(document.cookie.length > 0){
 	themecolormatch = document.cookie.match(/(^| )themecolor=([^;]+)(;|$)/);
 	if(themecolormatch != null)themecolor = unescape(themecolormatch[2])

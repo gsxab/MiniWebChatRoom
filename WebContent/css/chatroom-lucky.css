@@ -1,6 +1,10 @@
 @charset "UTF-8";
 /* nowifi主题 */
 
+html {
+	margin:0;
+	padding:0;
+}
 body {
 	text-align : center;
 }
