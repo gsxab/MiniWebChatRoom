@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import logincheck.LoginCheck;
 
@@ -28,7 +29,11 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LoginCheck login = LoginCheck.check(request.getSession());
+		LoginCheck login = null;
+		HttpSession session = request.getSession(false);
+		if(session != null) {
+			login = LoginCheck.check(session);
+		}
 		if(login != null) {
 			response.sendRedirect("frames.html?light=");
 		} else {

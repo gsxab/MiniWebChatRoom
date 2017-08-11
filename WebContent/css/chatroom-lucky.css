@@ -170,11 +170,8 @@ frameset frame {
 	text-align : left;
 	float : right;
 }*/
-.msgdhl:hover {
-	color : yellow;
-}
-.msgdhl:active {
-	color : black;
+.msgdhl, .msgdhl:hover, .msgdhl:active  {
+	color: black;
 	background-color : yellow;
 }
 .userdispminipriv:hover {
