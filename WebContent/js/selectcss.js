@@ -19,7 +19,7 @@ function IsPC() {
                 "iPad", "iPod"];
     var flag = true;
     for (var v = 0; v < Agents.length; v++) {
-        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+        if (userAgentInfo.indexOf(Agents[v]) != -1) {
             flag = false;
             break;
         }
@@ -27,6 +27,6 @@ function IsPC() {
     return flag;
 }
 if(themecolor == 'lucky'){
-	if(IsPC()){} else {themecolor = black; }
+	if(IsPC()){} else {themecolor = 'black'; }
 }
 selectcss(themecolor);

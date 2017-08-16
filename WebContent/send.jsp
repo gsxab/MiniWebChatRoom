@@ -116,7 +116,7 @@ function logoutfunc(){
 		</tr>
 		<tr>
 		<td><input type="button" class="cssselectorbtn" style="background-color:#09f" title="湖水青" onclick="setColorCookie('blue')" /></td>
-		<td><input type="button" class="cssselectorbtn" style="background-color:#09f" title="掉线蓝" onclick="setColorCookie('lucky')" /></td>
+		<td><input type="button" class="cssselectorbtn" style="background-color:#c9dbe9" title="没wifi" onclick="setColorCookie('lucky')" /></td>
 		</tr>
 	</table>
 	<center><table style="width:auto"><tr>
