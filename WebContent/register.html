@@ -13,12 +13,12 @@ function check(){
 	pass = true;
 	value = document.getElementById('username').value;
 	if(!re.exec(value)){
-		document.getElementById('nameprompt').innerHTML='用户名只允许字母数字且非空';
+		document.getElementById('nameprompt').innerHTML='用户名只允许字<br/>母数字且非空';
 		pass = false;
 	} else if(value.length >= 20) {
 		document.getElementById('nameprompt').innerHTML='用户名过长';
 		pass = false;
-	} else if(value.length <= 4) {
+	} else if(value.match(/^(\w{1,3}|[\u4e00-\u9fa5]|test)$/) != null) {
 		document.getElementById('nameprompt').innerHTML='用户名过短';
 		pass = false;
 	} else {
@@ -26,7 +26,7 @@ function check(){
 	}
 	value = document.getElementById('password').value;
 	if(!re.exec(value)){
-		document.getElementById('pswdprompt').innerHTML='密码只允许字母数字且非空';
+		document.getElementById('pswdprompt').innerHTML='密码只允许字母<br/>数字且非空';
 		pass = false;
 	} else if(value.length >= 20) {
 		document.getElementById('pswdprompt').innerHTML='密码过长';
@@ -36,7 +36,7 @@ function check(){
 		document.getElementById('pswdprompt').innerHTML='';
 	}
 	if(document.getElementById('password').value != document.getElementById('password2').value){
-		document.getElementById('pswd2prompt').innerHTML='确认密码与密码不一致';
+		document.getElementById('pswd2prompt').innerHTML='确认密码<br/>与密码不一致';
 		pass = false;
 	} else {
 		document.getElementById('pswd2prompt').innerHTML='';
@@ -71,8 +71,9 @@ function check_username(){
 <body class="noscroll">
 <div class="container">
 <img alt="黑暗系聊天室logo" src="img/logo.png" class="logo" />
-
 <div class="login">
+<p id="title" class="strangewords">
+本聊天室欢迎您的到来，请设置您的用户名和密码</p>
 <div class="clearfix">
 <form name="form1" action="registeraction.html" onsubmit="if(check()){return check_username();}else return false;" method="post">
 <table>

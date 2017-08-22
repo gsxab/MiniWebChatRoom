@@ -82,7 +82,8 @@ public class AvatarAction extends HttpServlet {
 			}
 		} catch (Exception e) {
 			Log.getInstance().logError("发送头像时异常" + login.getUser().toString()).logErrorOnException(e);
-			e.printStackTrace();
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html;charset=utf-8;pageencoding=utf-8");
 			response.getWriter().println("更换头像失败");
 		}
 	}

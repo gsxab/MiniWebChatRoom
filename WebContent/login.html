@@ -32,15 +32,14 @@ function check(){
 <body class="noscroll">
 <div class="container">
 <img alt="黑暗系聊天室logo" src="img/logo.png" class="logo" />
-<p id="title" class="strangewords">
-本聊天室欢迎你的归来，请输入您的用户名和密码</p>
-
 <div class="login">
+<p id="title" class="strangewords">
+本聊天室欢迎您的归来，请输入您的用户名和密码</p>
 <div class="clearfix">
 <form name="form1" action="loginaction.html" onsubmit="return check()" method="post">
 <table>
-	<tr><td><p class="prompt">用户名：</td><td><input type="text" name="username" id="username" class="input" onblur="check()" /></td><td><div id="prompt" class="warning"></div></td></tr>
-	<tr><td><p class="prompt">密&nbsp;&nbsp;码：</td><td><input type="password" name="password" id="password" class="input" onblur="check()" /></td><td><div id="pswdprompt" class="warning"></div></td></tr>
+	<tr><td><p class="prompt">用&nbsp;户&nbsp;名：</td><td><input type="text" name="username" id="username" class="input" onblur="check()" /></td><td><div id="prompt" class="warning"></div></td></tr>
+	<tr><td><p class="prompt">密&nbsp;&nbsp;&nbsp;&nbsp;码：</td><td><input type="password" name="password" id="password" class="input" onblur="check()" /></td><td><div id="pswdprompt" class="warning"></div></td></tr>
 	<tr><td/><td><input type="checkbox" class="less_emot" name="light" value="1" /><a class="prompt less_emot" style="text-align:left">减少表情</a></td></tr>
 	<tr><td></td><td><input type="submit" value="登录" /><input type="reset" value="清空" /></td></tr>
 </table>
