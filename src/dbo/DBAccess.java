@@ -12,20 +12,28 @@ import model.UserInfo;
 import log.Log;
 
 /**
- * 处理数据库相关连接的类，使用model包的类及其数组进行通信
+ * 处理数据库相关连接的类，使用model包的类及其数组进行通信.
+ * 初始化此类时加载数据库驱动器的类
  * @author gong
  */
 public class DBAccess {
 	private Connection conn;
 	
 	private static String dburl="jdbc:mysql://localhost:3306/chatroom?useSSL=false&useUnicode=true&characterEncoding=utf-8";
-	private static String dbuser="webuser";
-	private static String dbpassword="web613user";
+	private static String dbuser="nowifi";
+	private static String dbpassword="org.nowifi";
 	
+	/**
+	 * 使用默认的数据库连接用户名和密码进行通信
+	 * @throws SQLException
+	 */
 	public DBAccess() throws SQLException {
 		conn = DriverManager.getConnection(dburl, dbuser, dbpassword);
 	}
 	
+	/**
+	 * 类初始化时加载数据库驱动器
+	 */
 	static {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -35,6 +43,12 @@ public class DBAccess {
 		}
 	}
 
+	/**
+	 * 检查用户名是否存在
+	 * @param username 要检测的用户名
+	 * @return 如果已存在返回true，不存在返回false
+	 * @throws SQLException 当SQL异常发生时
+	 */
 	public boolean checkUser(String username) throws SQLException{
 		if(username == null)return false;
 		
@@ -61,6 +75,7 @@ public class DBAccess {
 	}
 	
 	/**
+	 * 注册或登录用户
 	 * @param user 用户信息结构，含用户名及密码
 	 * @param isRegister 当前操作是注册(true)还是登录(false)
 	 * @return 验证成功时，用户信息结构，含用户名密码及id；失败时null
@@ -125,6 +140,7 @@ public class DBAccess {
 	}
 	
 	/**
+	 * 获得用户列表.
 	 * @return UserInfo[], 是不包含密码的用户数据的列表，失败时返回null
 	 * @throws SQLException 
 	 */
@@ -188,6 +204,12 @@ public class DBAccess {
 		return msgs.toArray(new MessageInfo[0]);
 	}
 
+	/**
+	 * 获得某指定时间后的新消息.
+	 * @param specifiedtime 指定时间
+	 * @return 消息列表
+	 * @throws SQLException 当SQL异常发生时
+	 */
 	public MessageInfo[] getMessageListSince(java.util.Date specifiedtime) throws SQLException {
 		PreparedStatement sta = null;
 		LinkedList<MessageInfo> msgs = new LinkedList<MessageInfo>();
@@ -224,7 +246,8 @@ public class DBAccess {
 	}
 	
 	/**
-	 * @param msg
+	 * 发送新消息.
+	 * @param msg 要发送的消息
 	 * @return 是否成功
 	 * @throws SQLException SQL异常
 	 * @throws UnsupportedEncodingException 无法转换为UTF-8编码
@@ -289,16 +312,37 @@ public class DBAccess {
 		return false;
 	}
 	
-	//TODO
-	public boolean grantPrivilege(UserInfo.Privilege privilege) {
+	/**
+	 * 授予某用户指定权限.
+	 * @param user 用户
+	 * @param privilege 权限
+	 * @return 成功返回true，失败返回false
+	 * @version TODO 此函数未开放
+	 * @deprecated
+	 */
+	public boolean grantPrivilege(UserInfo user, UserInfo.Privilege privilege) {
 		return false;
 	}
 	
-	//TODO
-	public boolean revokePrivilege(UserInfo.Privilege privilege) {
+	/**
+	 * 撤回某用户指定权限.
+	 * @param user 用户
+	 * @param privilege 权限
+	 * @return 成功返回true，失败返回false
+	 * @version TODO 此函数未开放
+	 * @deprecated
+	 */
+	public boolean revokePrivilege(UserInfo user, UserInfo.Privilege privilege) {
 		return false;
 	}
 	
+	/**
+	 * 向数据库中插入头像.
+	 * @param user 用户
+	 * @param inputstream 文件的输入流
+	 * @return 成功返回true，否则false
+	 * @throws SQLException 发生SQL异常
+	 */
 	public boolean setAvatar(UserInfo user, InputStream inputstream) throws SQLException {
 		PreparedStatement sta1 = null;
 		try {
@@ -324,6 +368,12 @@ public class DBAccess {
 		}
 	}
 	
+	/**
+	 * 从数据库获得头像.
+	 * @param userId 用户ID
+	 * @return 用户头像的二进制数据，失败返回null
+	 * @throws SQLException
+	 */
 	public byte[] getAvatar(String userId) throws SQLException {
 		PreparedStatement sta = null;
 		ResultSet rs = null;

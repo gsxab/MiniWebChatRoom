@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import logincheck.LoginCheck;
 
 /**
+ * 接收访问主页的请求的servlet.
  * Servlet implementation class Index
  */
 @WebServlet({ "/Index", "/index", "/index.html" })

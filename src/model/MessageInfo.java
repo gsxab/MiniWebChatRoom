@@ -3,12 +3,28 @@ package model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 消息信息模型
+ * @author gong
+ */
 public class MessageInfo {
 	public MessageInfo() {}
 	
+	/**
+	 * 消息id
+	 */
 	private int id;
+	/**
+	 * 消息对应用户
+	 */
 	private UserInfo user;
+	/**
+	 * 消息时间
+	 */
 	private Date msgTime;
+	/**
+	 * 消息内容
+	 */
 	private String msgContent;
 
 	public int getId() {
@@ -36,7 +52,13 @@ public class MessageInfo {
 		this.msgContent = msgContent;
 	}
 
+	/**
+	 * 管理员的高亮标识
+	 */
 	static final String highlightmark = "#[hl!]";
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
 		String content;

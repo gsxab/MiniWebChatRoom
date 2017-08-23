@@ -14,6 +14,7 @@ import log.Log;
 import logincheck.LoginCheck;
 
 /**
+ * 接收对头像请求并取得用户头像的servlet.
  * Servlet implementation class GetAvatarAction
  */
 @WebServlet({ "/GetAvatarAction", "/getavataraction", "/avatar" })

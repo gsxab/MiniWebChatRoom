@@ -1,6 +1,14 @@
 package model;
 
+/**
+ * 用户信息类
+ * @author gong
+ */
 public class UserInfo {
+	/**
+	 * 特权的枚举
+	 * @author gong
+	 */
 	public enum Privilege{
 		NORMAL(0),
 		ADMIN(-1), 
@@ -30,11 +38,26 @@ public class UserInfo {
 		}
 	};
 	
+	/**
+	 * 默认构造函数
+	 */
 	public UserInfo() {}
 	
+	/**
+	 * 用户ID
+	 */
 	private String userId;
-	private String username;
+	/**
+	 * 用户名
+	 */
+	private String username;	
+	/**
+	 * 密码
+	 */
 	private String password;
+	/**
+	 * 用户身份
+	 */
 	private Privilege userpriv;
 	
 	public String getUserId() {

@@ -14,7 +14,7 @@ import model.UserInfo;
 
 /**
  * Application Lifecycle Listener implementation class LoginCount
- *
+ * 监听并计数在线人数的监听器
  */
 @WebListener
 public class LoginCount implements HttpSessionListener, HttpSessionAttributeListener {
@@ -27,7 +27,7 @@ public class LoginCount implements HttpSessionListener, HttpSessionAttributeList
     }
 
 	/**
-     * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
+     * {@inheritDoc}
      */
     public void sessionCreated(HttpSessionEvent arg0)  { 
     	HttpSession session = arg0.getSession();
@@ -53,7 +53,7 @@ public class LoginCount implements HttpSessionListener, HttpSessionAttributeList
     }
 
 	/**
-     * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
+     * {@inheritDoc}
      */
     public void sessionDestroyed(HttpSessionEvent arg0)  { 
     	HttpSession session = arg0.getSession();
@@ -80,6 +80,9 @@ public class LoginCount implements HttpSessionListener, HttpSessionAttributeList
      	}
     }
 
+    /**
+     * {@inheritDoc}
+     */
 	@Override
 	public void attributeAdded(HttpSessionBindingEvent arg0) {
 		// TODO Auto-generated method stub
@@ -98,6 +101,9 @@ public class LoginCount implements HttpSessionListener, HttpSessionAttributeList
 		Log.getInstance().log("当前在线用户：" + usersonline.toString());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void attributeRemoved(HttpSessionBindingEvent arg0) {
 		// TODO Auto-generated method stub
@@ -106,6 +112,9 @@ public class LoginCount implements HttpSessionListener, HttpSessionAttributeList
 		} catch (Exception e) {}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void attributeReplaced(HttpSessionBindingEvent arg0) {
 		// TODO Auto-generated method stub

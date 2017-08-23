@@ -18,6 +18,7 @@ import logincheck.LoginCheck;
 import model.UserInfo;
 
 /**
+ * 接收登录请求的servlet.
  * Servlet implementation class LoginAction
  */
 @WebServlet({ "/LoginAction", "/loginaction", "/loginaction.html" })

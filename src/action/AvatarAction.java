@@ -19,6 +19,7 @@ import log.Log;
 import logincheck.LoginCheck;
 
 /**
+ * 接收头像上传请求并管理头像上传的servlet.
  * Servlet implementation class AvatarAction
  */
 @WebServlet({ "/AvatarAction", "/avataraction" })

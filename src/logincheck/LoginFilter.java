@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 关于是否已登录的过滤器.
  * Servlet Filter implementation class LoginFilter
  */
 @WebFilter({"*.jsp", "/img/em/*"})
