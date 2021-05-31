@@ -13,7 +13,7 @@ create table cr_users(
 create table cr_msgs(
 	mid int primary key auto_increment,
 	uid char(36) not null, -- user infomation
-	mtime timestamp(3) not null default current_timestamp,
+	mtime timestamp not null default current_timestamp,
 	mcontent varchar(100) not null,
 	locked tinyint(1) not null default 0,
 	mhasprev tinyint(1) not null default 0, -- message has prev
@@ -21,12 +21,12 @@ create table cr_msgs(
 );
 create table cr_avatars (
 	uid char(36) primary key references cr_users(uid),
-	uavatar blob,
+	uavatar blob
 );
 
-grant select, insert on chatroom.cr_users to 'webuser'@'%';
-grant select, insert on chatroom.cr_msgs to 'webuser'@'%';
-grant select, insert, delete on chatroom.cr_avatars to 'webuser'@'%';
+grant select, insert on chatroom.cr_users to 'nowifi'@'localhost';
+grant select, insert on chatroom.cr_msgs to 'nowifi'@'localhost';
+grant select, insert, delete on chatroom.cr_avatars to 'nowifi'@'localhost';
 
 delimiter $$
 
